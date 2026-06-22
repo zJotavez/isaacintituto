@@ -1,0 +1,503 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-display: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  
+  --color-brand-blue: #002b49;
+  --color-brand-dark-blue: #001c30;
+  --color-brand-deepest: #000f1a;
+  --color-brand-gold: #a6894a;
+  --color-brand-gold-light: #cbb37a;
+  --color-brand-gold-pale: #e8d5a3;
+  --color-brand-wine: #5d101d;
+  --color-brand-wine-dark: #3d0b13;
+  --color-brand-ivory: #f8f5f0;
+  --color-brand-parchment: #f4f1ea;
+  --color-brand-parchment-dark: #ede9e0;
+}
+
+/* ================================================
+   CUSTOM PREMIUM UTILITIES
+   ================================================ */
+
+/* Gold text gradient - elegant aged gold effect */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #e8d5a3 0%, #cbb37a 30%, #a6894a 60%, #856d3b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-text-subtle {
+  background: linear-gradient(135deg, #cbb37a 0%, #a6894a 50%, #856d3b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold border gradient */
+.gold-border-gradient {
+  border-image: linear-gradient(to right, transparent, #cbb37a, #a6894a, #856d3b, transparent) 1;
+}
+
+/* ================================================
+   SCROLLBAR STYLING
+   ================================================ */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #000f1a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a6894a, #5d101d);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #cbb37a, #a6894a);
+}
+
+/* ================================================
+   TEXTURE OVERLAYS
+   ================================================ */
+
+/* Aged parchment - light sections */
+.paper-texture {
+  background-color: #f8f5f0;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Dark deep navy with subtle noise */
+.dark-texture {
+  background-color: #001c30;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Dark parchment for premium overlays */
+.dark-parchment {
+  background: radial-gradient(ellipse at 50% 0%, #002b49 0%, #001625 60%, #000f1a 100%);
+}
+
+/* Vignette overlay */
+.vignette {
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.6);
+}
+
+/* ================================================
+   ORNAMENTAL DIVIDERS
+   ================================================ */
+
+/* Elegant horizontal ornamental divider */
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(166, 137, 74, 0.4), transparent);
+}
+
+/* Section label accent */
+.section-label {
+  font-family: "Cinzel", serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #a6894a;
+  font-weight: 600;
+}
+
+/* ================================================
+   ANIMATION UTILITIES
+   ================================================ */
+
+/* Smooth fade-up for scroll reveals */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Elegant shimmer on gold elements */
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Breathing glow for decorative elements */
+@keyframes breatheGlow {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%       { opacity: 0.25; transform: scale(1.05); }
+}
+
+/* Floating upward for dust particles */
+@keyframes floatUp {
+  0%   { transform: translateY(0) scale(1);   opacity: 0.6; }
+  100% { transform: translateY(-120px) scale(0.6); opacity: 0; }
+}
+
+/* Slow pan for cartographic background */
+@keyframes slowPan {
+  0%   { transform: scale(1.02) translate(0, 0); }
+  50%  { transform: scale(1.05) translate(-8px, -4px); }
+  100% { transform: scale(1.02) translate(0, 0); }
+}
+
+/* Rotate for compass rose */
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Pulse for timeline nodes */
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(166, 137, 74, 0.5); }
+  70%  { box-shadow: 0 0 0 10px rgba(166, 137, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(166, 137, 74, 0); }
+}
+
+/* Gentle floating */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Candle flicker for ambiance */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.85; }
+}
+
+/* Animation classes */
+.animate-breathe   { animation: breatheGlow 4s ease-in-out infinite; }
+.animate-slow-pan  { animation: slowPan 20s ease-in-out infinite; }
+.animate-rotate-slow { animation: rotateSlow 60s linear infinite; }
+.animate-pulse-ring  { animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+.animate-float       { animation: gentleFloat 6s ease-in-out infinite; }
+.animate-flicker     { animation: flicker 3s ease-in-out infinite; }
+.animate-gold-shimmer {
+  background: linear-gradient(90deg, #a6894a, #e8d5a3, #cbb37a, #856d3b, #cbb37a);
+  background-size: 200% auto;
+  animation: goldShimmer 4s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ================================================
+   CARD & COMPONENT PREMIUM STYLES
+   ================================================ */
+
+/* Premium card hover effect */
+.card-premium {
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
+}
+.card-premium:hover {
+  transform: translateY(-4px);
+}
+
+/* Button premium interactions */
+.btn-gold {
+  background: linear-gradient(135deg, #a6894a 0%, #cbb37a 50%, #a6894a 100%);
+  background-size: 200% auto;
+  transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn-gold:hover {
+  background-position: right center;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(166, 137, 74, 0.3);
+}
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+/* Elegant ghost button */
+.btn-ghost-gold {
+  border: 1px solid rgba(166, 137, 74, 0.4);
+  transition: all 0.3s ease;
+}
+.btn-ghost-gold:hover {
+  border-color: #a6894a;
+  background: rgba(166, 137, 74, 0.08);
+  box-shadow: 0 0 20px rgba(166, 137, 74, 0.12);
+}
+
+/* ================================================
+   TYPOGRAPHIC ENHANCEMENTS
+   ================================================ */
+
+/* Drop cap for article first paragraph */
+.drop-cap::first-letter {
+  font-family: "Cinzel", serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 0.8;
+  float: left;
+  margin-right: 0.12em;
+  margin-bottom: 0.05em;
+  color: #5d101d;
+}
+
+/* Cinzel header */
+.font-display {
+  font-family: "Cinzel", "Cormorant Garamond", serif;
+}
+
+/* ================================================
+   LAYOUT & SPACING
+   ================================================ */
+
+/* Section container spacing */
+.section-inner {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-inner { padding-inline: 2rem; }
+}
+@media (min-width: 1024px) {
+  .section-inner { padding-inline: 3rem; }
+}
+
+/* Scroll reveal helper */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================================
+   DECORATIVE ELEMENTS
+   ================================================ */
+
+/* Ornamental star of David-inspired pattern */
+.ornament-star::before {
+  content: '✦';
+  color: rgba(166, 137, 74, 0.4);
+  font-size: 0.5rem;
+}
+
+/* Thin gold top accent bar */
+.gold-accent-top {
+  position: relative;
+}
+.gold-accent-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #a6894a, #cbb37a, #a6894a, transparent);
+}
+
+/* ================================================
+   SELECTION COLOR
+   ================================================ */
+::selection {
+  background: rgba(166, 137, 74, 0.3);
+  color: #001c30;
+}
+
+/* ================================================
+   NEW PREMIUM ADORNMENTS & INTERACTIVE GLASS
+   ================================================ */
+
+/* Old paper / Historical letter style */
+.old-paper {
+  background-color: #fcf9f2;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.93 0 0 0 0 0.88 0 0 0 0 0.80 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23noise)'/%3E%3C/svg%3E"),
+    linear-gradient(to bottom, rgba(252, 249, 242, 0.95) 0%, rgba(244, 237, 221, 0.97) 100%);
+  border: 1px solid rgba(166, 137, 74, 0.3);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    inset 0 0 60px rgba(166, 137, 74, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.old-paper::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px solid rgba(166, 137, 74, 0.2);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Crossword text-decoration backdrop */
+.crossword-bg {
+  background-image: radial-gradient(rgba(166, 137, 74, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  position: relative;
+}
+
+/* Card glass glow */
+.card-glow-gold {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-glow-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(166, 137, 74, 0.1) 0%, rgba(166, 137, 74, 0.4) 50%, rgba(166, 137, 74, 0.05) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.4s ease;
+}
+
+.card-glow-gold:hover::before {
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(166, 137, 74, 0.3) 0%, rgba(203, 179, 122, 0.7) 50%, rgba(166, 137, 74, 0.2) 100%);
+}
+
+.card-glow-gold:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(166, 137, 74, 0.15);
+}
+
+/* Border animation draw effect */
+.border-draw-container {
+  position: relative;
+}
+
+.border-draw-line {
+  position: absolute;
+  background-color: #a6894a;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.border-draw-top {
+  top: 0; left: 0; height: 1px; width: 0;
+}
+.border-draw-bottom {
+  bottom: 0; right: 0; height: 1px; width: 0;
+}
+.border-draw-left {
+  bottom: 0; left: 0; width: 1px; height: 0;
+}
+.border-draw-right {
+  top: 0; right: 0; width: 1px; height: 0;
+}
+
+.border-draw-container:hover .border-draw-top { width: 100%; }
+.border-draw-container:hover .border-draw-bottom { width: 100%; }
+.border-draw-container:hover .border-draw-left { height: 100%; }
+.border-draw-container:hover .border-draw-right { height: 100%; }
+
+/* Wax seal stamp effect */
+.wax-seal {
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle at 35% 35%, #8b1828 0%, #5d101d 60%, #3d0b13 100%);
+  border-radius: 50%;
+  box-shadow: 
+    2px 4px 10px rgba(0,0,0,0.3),
+    inset -2px -2px 6px rgba(0,0,0,0.5),
+    inset 2px 2px 4px rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8d5a3;
+  font-family: "Cinzel", serif;
+  font-weight: bold;
+  font-size: 14px;
+  border: 1px solid #4a0d17;
+  transform: rotate(-12deg);
+  user-select: none;
+}
+
+/* Historical Letter paper sheet style */
+.historical-letter {
+  background-color: #fcf8f0;
+  background-image: 
+    /* Vertical red margin line */
+    linear-gradient(to right, transparent 38px, rgba(139, 24, 40, 0.15) 38px, rgba(139, 24, 40, 0.15) 39px, transparent 39px),
+    /* Horizontal lines */
+    linear-gradient(rgba(166, 137, 74, 0.07) 1px, transparent 1px),
+    /* Texture noise */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 100% 28px, auto;
+  background-repeat: no-repeat, repeat, repeat;
+  border: 1px solid rgba(166, 137, 74, 0.25);
+  box-shadow: 
+    3px 3px 0 rgba(212, 197, 169, 0.5),
+    6px 6px 0 rgba(212, 197, 169, 0.25),
+    0 15px 35px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: rotate(-0.5deg);
+  transition: transform 0.3s ease;
+}
+
+.historical-letter:hover {
+  transform: rotate(0deg) scale(1.01);
+}
+
+/* Historical Papyrus style - rustic, organic texture with crossed fibers */
+.historical-papyrus {
+  background-color: #e2cca0;
+  background-image: 
+    /* Vertical fibers */
+    linear-gradient(to right, rgba(90, 65, 30, 0.08) 2px, transparent 2px),
+    /* Horizontal fibers */
+    linear-gradient(rgba(90, 65, 30, 0.08) 1.5px, transparent 1.5px),
+    /* Organic paper grain and spots */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.58 0 0 0 0 0.44 0 0 0 0 0.28 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 6px 100%, 100% 5px, auto;
+  background-repeat: repeat, repeat, repeat;
+  border: 1.5px dashed rgba(120, 90, 40, 0.35);
+  /* Organic irregular borders typical of dry ancient papyrus */
+  border-radius: 6px 18px 8px 24px / 12px 6px 14px 10px;
+  box-shadow: 
+    5px 15px 35px rgba(0, 0, 0, 0.35),
+    inset 0 0 50px rgba(90, 65, 30, 0.2);
+  position: relative;
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.historical-papyrus:hover {
+  transform: rotate(0.5deg) scale(1.015);
+  box-shadow: 
+    8px 20px 45px rgba(0, 0, 0, 0.4),
+    inset 0 0 40px rgba(90, 65, 30, 0.15);
+}
+
+.historical-papyrus::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Shadow depth inside papyrus fiber overlaps */
+  background: radial-gradient(circle at 80% 20%, transparent 40%, rgba(90, 65, 30, 0.06) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+
+
