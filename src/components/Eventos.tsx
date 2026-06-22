@@ -109,21 +109,22 @@ export default function Eventos() {
   const registerEvent = EVENTS.find(e => e.id === registerEventId);
 
   return (
-    <section 
-      className="relative py-28 sm:py-36 dark-texture overflow-hidden"
-      style={{ background: 'radial-gradient(circle at 30% 70%, #001c30 0%, #000c15 70%, #002b49 100%)' }}
-    >
+    <section className="relative py-28 sm:py-36 paper-texture overflow-hidden bg-[#fbf9f5]">
 
-      {/* Top & bottom transition gradient overlays (no hard borders) */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-brand-deepest to-transparent pointer-events-none z-10" />
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-brand-deepest to-transparent pointer-events-none z-10" />
-
-      {/* Decorative large arched circles (technological / astrolabe style) */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none -mr-80 -mt-80 opacity-[0.06] z-0"
-        style={{ border: '1px dashed #a6894a' }}
+      {/* Top & bottom ornamental lines */}
+      <div className="absolute top-0 inset-x-0 h-[1px]"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(166,137,74,0.5) 30%, rgba(203,179,122,0.7) 50%, rgba(166,137,74,0.5) 70%, transparent)' }}
       />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none -ml-64 -mb-64 opacity-[0.06] z-0"
-        style={{ border: '1px dashed #a6894a' }}
+      <div className="absolute bottom-0 inset-x-0 h-[1px]"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(166,137,74,0.3) 30%, rgba(166,137,74,0.5) 50%, rgba(166,137,74,0.3) 70%, transparent)' }}
+      />
+
+      {/* Decorative large arched circles */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none -mr-80 -mt-80 opacity-[0.03]"
+        style={{ border: '1px solid #002b49' }}
+      />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none -ml-64 -mb-64 opacity-[0.03]"
+        style={{ border: '1px solid #002b49' }}
       />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
