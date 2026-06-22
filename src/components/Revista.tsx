@@ -400,8 +400,10 @@ export default function Revista({ isStandAlone = false }: RevistaProps) {
         )}
       </AnimatePresence>
 
-      {/* Bottom transition fade overlay (no hard borders) */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-brand-deepest to-transparent pointer-events-none z-10" />
+      {/* Bottom decorative line */}
+      <div className="absolute bottom-0 inset-x-0 h-[1px] z-10"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(166,137,74,0.4) 30%, rgba(166,137,74,0.5) 50%, rgba(166,137,74,0.4) 70%, transparent)' }}
+      />
     </section>
   );
 }

@@ -35,9 +35,9 @@ export default function Timeline() {
   return (
     <section ref={sectionRef} className="relative py-28 sm:py-36 overflow-hidden dark-texture">
 
-      {/* Smooth transition from light Revista to dark Timeline */}
-      <div className="absolute top-0 inset-x-0 h-24 pointer-events-none z-10"
-        style={{ background: 'linear-gradient(to bottom, #ede9e0 0%, transparent 100%)' }}
+      {/* Top gold line */}
+      <div className="absolute top-0 inset-x-0 h-[1px] z-10"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(166,137,74,0.4) 30%, rgba(203,179,122,0.6) 50%, rgba(166,137,74,0.4) 70%, transparent)' }}
       />
 
       {/* Large decorative celestial circle watermark */}
