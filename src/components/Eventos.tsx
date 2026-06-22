@@ -74,7 +74,7 @@ const getEventDetails = (id: string): EventDetail => {
 
 export default function Eventos() {
   const [activeFilter, setActiveFilter] = useState<'todos' | 'live' | 'curso' | 'palestra'>('todos');
-  const [viewMode, setViewMode] = useState<'lista' | 'grade'>('lista');
+  const [viewMode, setViewMode] = useState<'lista' | 'grade'>('grade');
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   
   // Registration modal states
@@ -199,7 +199,7 @@ export default function Eventos() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.35 }}
-              className={viewMode === 'grade' ? "grid grid-cols-1 md:grid-cols-2 gap-6" : "space-y-4"}
+              className={viewMode === 'grade' ? "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4" : "space-y-4"}
             >
               {filteredEvents.map((event, index) => {
                 const dt = getEventDate(event.id);
@@ -207,23 +207,23 @@ export default function Eventos() {
                   <div
                     key={event.id}
                     className={`group flex flex-col bg-white border border-brand-gold/15 rounded-[2px] hover:border-brand-gold/40 hover:shadow-lg transition-all duration-400 ${
-                      viewMode === 'lista' ? 'sm:flex-row items-stretch gap-4 p-5' : 'p-6'
+                      viewMode === 'lista' ? 'sm:flex-row items-stretch gap-4 p-5' : 'p-3.5 sm:p-5'
                     }`}
                   >
                     {/* Left Date badge */}
                     <div className={`flex items-center justify-center shrink-0 text-center rounded-[1px] ${
                       viewMode === 'lista' 
                         ? 'p-3 sm:px-4 sm:py-3 sm:flex-col sm:min-w-[65px] bg-brand-gold/5 border border-brand-gold/15' 
-                        : 'p-3 mb-4 bg-brand-gold/5 border border-brand-gold/15 max-w-[80px]'
+                        : 'p-2 sm:p-3 mb-3 bg-brand-gold/5 border border-brand-gold/15 max-w-[65px] sm:max-w-[80px]'
                     }`}
                     >
-                      <span className="font-display text-xs tracking-widest text-brand-gold font-bold uppercase sm:mb-1 block leading-none mr-2 sm:mr-0">
+                      <span className="font-display text-[10px] sm:text-xs tracking-widest text-brand-gold font-bold uppercase sm:mb-1 block leading-none mr-2 sm:mr-0">
                         {dt.month}
                       </span>
-                      <span className="font-display text-xl sm:text-2xl font-extrabold text-brand-blue block leading-none sm:mb-1">
+                      <span className="font-display text-lg sm:text-2xl font-extrabold text-brand-blue block leading-none sm:mb-1">
                         {dt.day}
                       </span>
-                      <span className="font-mono text-[8px] text-slate-400 uppercase tracking-widest block leading-none ml-2 sm:ml-0">
+                      <span className="font-mono text-[7px] sm:text-[8px] text-slate-400 uppercase tracking-widest block leading-none ml-2 sm:ml-0">
                         {dt.year}
                       </span>
                     </div>
@@ -231,37 +231,37 @@ export default function Eventos() {
                     {/* Middle Info Panel */}
                     <div className="flex-1 flex flex-col justify-between py-1">
                       <div>
-                        <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <div className="w-6 h-6 rounded flex items-center justify-center shrink-0 bg-[#f8f5f0] border border-brand-gold/15">
+                        <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                          <div className="w-5.5 h-5.5 rounded flex items-center justify-center shrink-0 bg-[#f8f5f0] border border-brand-gold/15">
                             {getEventIcon(event.type)}
                           </div>
-                          <span className="text-[9px] uppercase font-sans font-bold tracking-[0.2em] text-slate-400">
+                          <span className="text-[8px] sm:text-[9px] uppercase font-sans font-bold tracking-[0.2em] text-slate-400">
                             {eventTypeLabel[event.type] || 'Evento'}
                           </span>
                         </div>
 
-                        <h4 className="font-serif text-base sm:text-lg font-bold text-brand-blue group-hover:text-brand-wine transition-colors duration-300 leading-snug tracking-wide mb-1.5">
+                        <h4 className="font-serif text-[13px] sm:text-base md:text-lg font-bold text-brand-blue group-hover:text-brand-wine transition-colors duration-300 leading-snug tracking-wide mb-1 line-clamp-2">
                           {event.title}
                         </h4>
 
-                        <p className="text-xs text-slate-500 font-sans font-light leading-relaxed mb-4">
+                        <p className="text-[11px] sm:text-xs text-slate-500 font-sans font-light leading-relaxed mb-3 line-clamp-2 sm:line-clamp-3">
                           {event.description}
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between pt-3 border-t border-brand-gold/10 mt-auto">
+                      <div className="flex items-center justify-between pt-2.5 border-t border-brand-gold/10 mt-auto">
                         <button
                           onClick={() => setSelectedEventId(event.id)}
-                          className="text-[10px] font-sans font-bold tracking-[0.12em] uppercase text-brand-gold-light hover:text-brand-gold transition-colors cursor-pointer"
+                          className="text-[8px] sm:text-[10px] font-sans font-bold tracking-[0.12em] uppercase text-brand-gold-light hover:text-brand-gold transition-colors cursor-pointer"
                         >
                           Ver Detalhes
                         </button>
                         <button 
                           onClick={() => setRegisterEventId(event.id)}
-                          className="flex items-center gap-1 text-[10px] font-sans font-bold tracking-[0.15em] uppercase text-brand-wine hover:text-brand-blue transition-colors duration-250 cursor-pointer"
+                          className="flex items-center gap-0.5 text-[8px] sm:text-[10px] font-sans font-bold tracking-[0.15em] uppercase text-brand-wine hover:text-brand-blue transition-colors duration-250 cursor-pointer"
                         >
-                          <span>Inscrever-se</span>
-                          <ChevronRight size={11} />
+                          <span>Inscrever</span>
+                          <ChevronRight size={9} />
                         </button>
                       </div>
                     </div>

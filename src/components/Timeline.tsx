@@ -126,7 +126,7 @@ export default function Timeline() {
                   </div>
 
                   {/* Card container */}
-                  <div className={`pl-16 md:pl-0 w-full md:w-[47%] ${isEven ? 'md:pr-14' : 'md:pl-14'}`}>
+                  <div className={`pl-16 md:pl-0 w-full md:w-[42%] ${isEven ? 'md:pr-10' : 'md:pl-10'}`}>
                     <motion.div
                       initial={{ opacity: 0, x: isEven ? -35 : 35 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -134,11 +134,10 @@ export default function Timeline() {
                       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     >
                       <div
-                        className="group relative overflow-hidden cursor-pointer transition-all duration-500 rounded-[3px] border"
+                        className="group relative overflow-hidden cursor-pointer transition-all duration-500 rounded-[3px] border p-4 sm:p-6"
                         onClick={() => toggleExpand(step.id)}
                         style={{
                           border: isExpanded ? '1px solid rgba(166,137,74,0.45)' : '1px solid rgba(166,137,74,0.15)',
-                          padding: '1.75rem 2rem',
                           boxShadow: isExpanded ? '0 12px 40px rgba(0,0,0,0.4)' : '0 4px 20px rgba(0,0,0,0.2)',
                         }}
                       >
@@ -159,7 +158,7 @@ export default function Timeline() {
                         {/* Card contents wrapper */}
                         <div className="relative z-10">
                           {/* Period tag */}
-                          <span className="inline-block font-display text-[9px] tracking-[0.2em] font-semibold uppercase px-2.5 py-1.5 mb-4 select-none"
+                          <span className="inline-block font-display text-[8px] tracking-[0.2em] font-semibold uppercase px-2 py-1 mb-3.5 select-none"
                             style={{
                               background: 'rgba(166,137,74,0.08)',
                               color: '#cbb37a',
@@ -171,12 +170,12 @@ export default function Timeline() {
                           </span>
 
                           {/* Title */}
-                          <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-ivory mb-3 leading-snug group-hover:text-brand-gold-light transition-colors duration-300">
+                          <h3 className="font-serif text-[17px] sm:text-xl font-bold text-brand-ivory mb-2.5 leading-snug group-hover:text-brand-gold-light transition-colors duration-300">
                             {step.title}
                           </h3>
 
                           {/* Short description */}
-                          <p className="text-sm text-brand-ivory/60 font-sans font-light leading-relaxed mb-4">
+                          <p className="text-xs sm:text-sm text-brand-ivory/60 font-sans font-light leading-relaxed mb-3.5">
                             {step.description}
                           </p>
 

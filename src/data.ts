@@ -1,4 +1,6 @@
 import { Article, TimelineItem, PillarItem, EventItem, BookItem } from './types';
+import acervoManuscript from './assets/acervo_manuscript.png';
+
 
 export const PILLARS: PillarItem[] = [
   {
@@ -54,7 +56,7 @@ Redescobrir essa memória familiar não é apenas um feito de rigor histórico, 
     author: 'Dra. Rachel Fonseca lopes',
     date: '02 de Junho de 2026',
     readTime: '6 min de leitura',
-    imageUrl: 'https://images.unsplash.com/photo-1576016770956-debb63d900ef?auto=format&fit=crop&q=80&w=800'
+    imageUrl: acervoManuscript
   },
   {
     id: 'art-3',

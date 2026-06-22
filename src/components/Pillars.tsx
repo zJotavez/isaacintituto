@@ -107,88 +107,90 @@ export default function Pillars() {
         </div>
 
         {/* Pillars grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {PILLARS.map((pillar, i) => (
-            <motion.div
-              key={pillar.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.7, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative flex flex-col cursor-default"
-            >
-              {/* Card wrapper with custom color transition depending on pillar ID */}
-              <div 
-                className="flex-1 relative overflow-hidden transition-all duration-500 rounded-[3px] border border-brand-gold/15 group-hover:border-brand-gold/45 shadow-2xl group-hover:shadow-[0_25px_60px_rgba(0,0,0,0.55),_0_0_22px_rgba(166,137,74,0.25)] flex flex-col"
-                style={{
-                  minHeight: '380px',
-                }}
-              >
-                
-                {/* 1. BACKGROUND IMAGE OF THE CARD */}
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src={getBgImage(pillar.id)}
-                    alt={pillar.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  
-                  {/* Dark overlay for readability (dark-blue vignette) */}
-                  <div className="absolute inset-0 transition-opacity duration-500 bg-gradient-to-t from-brand-deepest via-brand-dark-blue/85 to-brand-dark-blue/60 group-hover:via-brand-dark-blue/80" />
-                </div>
-
-                {/* 2. INNER GLASS GLOW BORDER */}
-                <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    boxShadow: 'inset 0 0 0 1px rgba(166, 137, 74, 0.15), inset 0 0 30px rgba(0,0,0,0.3)',
-                  }}
-                />
-
-                {/* Corner ornaments (only top-left & bottom-right for elegance) */}
-                <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-brand-gold/30 opacity-40 group-hover:opacity-100 transition-all duration-400" />
-                <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-brand-gold/30 opacity-40 group-hover:opacity-100 transition-all duration-400" />
-
-                {/* 3. CARD CONTENT */}
-                <div className="relative z-10 p-8 sm:p-10 flex-1 flex flex-col justify-between">
-                  
-                  {/* Top row: Icon + Index */}
-                  <div className="flex items-start justify-between">
-                    <div className="w-11 h-11 flex items-center justify-center relative transition-all duration-400 group-hover:border-brand-gold/40"
-                      style={{ 
-                        background: 'rgba(0, 28, 48, 0.75)', 
-                        border: '1px solid rgba(166, 137, 74, 0.2)', 
-                        borderRadius: '2px',
-                        backdropFilter: 'blur(4px)'
-                      }}
-                    >
-                      {getIcon(pillar.iconName)}
+        {/* Pillars Infinite Carousel */}
+        <div className="relative w-full overflow-hidden py-4 z-10">
+          <div className="flex gap-6 sm:gap-8 animate-infinite-scroll">
+            {[...PILLARS, ...PILLARS, ...PILLARS].map((pillar, idx) => {
+              const originalIndex = (idx % PILLARS.length) + 1;
+              return (
+                <div
+                  key={`${pillar.id}-${idx}`}
+                  className="group relative flex flex-col cursor-default w-[280px] sm:w-[320px] shrink-0"
+                >
+                  {/* Card wrapper */}
+                  <div 
+                    className="flex-1 relative overflow-hidden transition-all duration-500 rounded-[3px] border border-brand-gold/15 group-hover:border-brand-gold/45 shadow-2xl group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.55),_0_0_20px_rgba(166,137,74,0.25)] flex flex-col"
+                    style={{
+                      minHeight: '330px',
+                    }}
+                  >
+                    
+                    {/* 1. BACKGROUND IMAGE OF THE CARD */}
+                    <div className="absolute inset-0 z-0">
+                      <img
+                        src={getBgImage(pillar.id)}
+                        alt={pillar.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      
+                      {/* Dark overlay for readability */}
+                      <div className="absolute inset-0 transition-opacity duration-500 bg-gradient-to-t from-brand-deepest via-brand-dark-blue/85 to-brand-dark-blue/60 group-hover:via-brand-dark-blue/80" />
                     </div>
-                    <span className="font-display text-4xl font-extrabold text-brand-gold/10 group-hover:text-brand-gold/20 transition-colors duration-450 select-none leading-none">
-                      0{i + 1}
-                    </span>
-                  </div>
 
-                  {/* Bottom section: Text metadata */}
-                  <div className="mt-12">
-                    <h3 className="font-display text-xl sm:text-2xl font-semibold text-brand-ivory mb-4 tracking-wide group-hover:text-brand-gold-light transition-colors duration-300">
-                      {pillar.title}
-                    </h3>
-
-                    {/* Animated accent line */}
-                    <div className="w-8 h-[1.5px] mb-5 transition-all duration-500 group-hover:w-16"
-                      style={{ background: 'linear-gradient(to right, #5d101d, #a6894a)' }}
+                    {/* 2. INNER GLASS GLOW BORDER */}
+                    <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{
+                        boxShadow: 'inset 0 0 0 1px rgba(166, 137, 74, 0.15), inset 0 0 30px rgba(0,0,0,0.3)',
+                      }}
                     />
 
-                    <p className="text-sm sm:text-[14.5px] text-brand-ivory/65 font-sans font-light leading-relaxed group-hover:text-brand-ivory/85 transition-colors duration-300">
-                      {pillar.description}
-                    </p>
+                    {/* Corner ornaments */}
+                    <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-brand-gold/30 opacity-40 group-hover:opacity-100 transition-all duration-400" />
+                    <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-brand-gold/30 opacity-40 group-hover:opacity-100 transition-all duration-400" />
+
+                    {/* 3. CARD CONTENT */}
+                    <div className="relative z-10 p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                      
+                      {/* Top row: Icon + Index */}
+                      <div className="flex items-start justify-between">
+                        <div className="w-10 h-10 flex items-center justify-center relative transition-all duration-400 group-hover:border-brand-gold/40"
+                          style={{ 
+                            background: 'rgba(0, 28, 48, 0.75)', 
+                            border: '1px solid rgba(166, 137, 74, 0.2)', 
+                            borderRadius: '2px',
+                            backdropFilter: 'blur(4px)'
+                          }}
+                        >
+                          {getIcon(pillar.iconName)}
+                        </div>
+                        <span className="font-display text-3xl font-extrabold text-brand-gold/10 group-hover:text-brand-gold/20 transition-colors duration-450 select-none leading-none">
+                          0{originalIndex}
+                        </span>
+                      </div>
+
+                      {/* Bottom section: Text metadata */}
+                      <div className="mt-8">
+                        <h3 className="font-display text-lg sm:text-xl font-semibold text-brand-ivory mb-3 tracking-wide group-hover:text-brand-gold-light transition-colors duration-300">
+                          {pillar.title}
+                        </h3>
+
+                        {/* Animated accent line */}
+                        <div className="w-7 h-[1.5px] mb-4 transition-all duration-500 group-hover:w-14"
+                          style={{ background: 'linear-gradient(to right, #5d101d, #a6894a)' }}
+                        />
+
+                        <p className="text-xs sm:text-[13.5px] text-brand-ivory/65 font-sans font-light leading-relaxed group-hover:text-brand-ivory/85 transition-colors duration-300">
+                          {pillar.description}
+                        </p>
+                      </div>
+
+                    </div>
+
                   </div>
-
                 </div>
-
-              </div>
-            </motion.div>
-          ))}
+              );
+            })}
+          </div>
         </div>
 
       </div>

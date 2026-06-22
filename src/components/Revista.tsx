@@ -112,134 +112,61 @@ export default function Revista({ isStandAlone = false }: RevistaProps) {
           </div>
         ) : (
           <div className="space-y-10">
-            {/* Featured Article (First article, large horizontal banner) */}
-            {filteredArticles.length > 0 && activeCategory === 'Todos' && (
-              <motion.article
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white border border-brand-gold/15 overflow-hidden shadow-xl"
-                style={{ borderRadius: '2px' }}
-              >
-                {/* Image panel */}
-                <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto min-h-[350px] overflow-hidden bg-brand-blue">
-                  <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-brand-dark-blue/80 via-brand-dark-blue/20 to-transparent z-10" />
-                  <img
-                    src={filteredArticles[0].imageUrl}
-                    alt={filteredArticles[0].title}
-                    className="w-full h-full object-cover transform scale-100 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
-                  />
-                  <span className="absolute top-4 left-4 z-20 font-sans text-[8px] tracking-[0.2em] font-bold uppercase px-3 py-1.5 bg-brand-deepest text-brand-gold border border-brand-gold/30">
-                    Destaque Editorial
-                  </span>
-                  <span className="absolute bottom-4 right-4 z-20 font-sans text-[9px] tracking-wider font-medium flex items-center gap-1 text-brand-ivory/70">
-                    <Clock size={10} className="text-brand-gold" />
-                    {filteredArticles[0].readTime}
-                  </span>
-                </div>
-
-                {/* Content panel */}
-                <div className="lg:col-span-5 flex flex-col justify-between p-8 sm:p-10 bg-brand-parchment">
-                  <div>
-                    {/* Meta */}
-                    <div className="flex items-center gap-3 mb-4 text-xs text-slate-400 font-sans">
-                      <div className="flex items-center gap-1.5">
-                        <User size={11} className="text-brand-gold/60" />
-                        <span className="font-medium text-slate-500">{filteredArticles[0].author}</span>
-                      </div>
-                      <span>·</span>
-                      <div className="flex items-center gap-1.5">
-                        <Calendar size={11} className="text-brand-gold/60" />
-                        <span>{filteredArticles[0].date}</span>
-                      </div>
-                    </div>
-
-                    <span className="font-display text-[9px] tracking-[0.2em] uppercase font-bold text-brand-gold-light block mb-2">
-                      {filteredArticles[0].category}
+            {/* Gallery grid for all articles */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+              {filteredArticles.map((article, index) => (
+                <motion.article
+                  key={article.id}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="group flex flex-col bg-white border border-brand-gold/12 overflow-hidden shadow-md transition-all duration-400 hover:shadow-xl hover:border-brand-gold/35 rounded-[3px]"
+                >
+                  {/* Image banner */}
+                  <div className="relative overflow-hidden bg-brand-blue h-28 sm:h-40 w-full shrink-0">
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-blue/70 via-brand-dark-blue/10 to-transparent z-10" />
+                    <img
+                      src={article.imageUrl}
+                      alt={article.title}
+                      className="w-full h-full object-cover transform scale-100 group-hover:scale-[1.04] transition-transform duration-700"
+                      loading="lazy"
+                    />
+                    <span className="absolute top-2 left-2 z-20 font-sans text-[7px] tracking-[0.15em] font-bold uppercase px-2 py-0.5 bg-brand-dark-blue/90 text-brand-gold-light border border-brand-gold/10">
+                      {article.category}
                     </span>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-brand-blue group-hover:text-brand-wine transition-colors duration-300 leading-tight tracking-tight mb-5">
-                      {filteredArticles[0].title}
-                    </h3>
-                    <div className="w-16 h-[1.5px] mb-5 bg-gradient-to-r from-brand-gold to-transparent" />
-                    <p className="text-sm text-slate-600 font-sans font-light leading-relaxed mb-6">
-                      {filteredArticles[0].summary}
-                    </p>
                   </div>
 
-                  <div className="pt-6 border-t border-brand-gold/15 flex items-center justify-between">
-                    <button
-                      onClick={() => setSelectedArticle(filteredArticles[0])}
-                      className="flex items-center gap-2 text-[11px] font-sans font-bold tracking-[0.18em] uppercase text-brand-wine hover:text-brand-blue transition-colors duration-200 cursor-pointer"
-                    >
-                      <span>Ler Ensaio Completo</span>
-                      <ChevronRight size={13} className="transform group-hover:translate-x-1 transition-transform" />
-                    </button>
+                  {/* Content body */}
+                  <div className="flex-1 p-3.5 sm:p-5 flex flex-col justify-between bg-brand-parchment">
+                    <div>
+                      {/* Meta */}
+                      <div className="flex items-center gap-1.5 mb-2 text-[9px] sm:text-xs text-slate-400 font-sans">
+                        <span className="font-medium text-slate-500 truncate max-w-[70px] sm:max-w-[110px]">{article.author}</span>
+                        <span>·</span>
+                        <span>{article.date}</span>
+                      </div>
+
+                      <h4 className="font-serif text-[13px] sm:text-base font-bold text-brand-blue group-hover:text-brand-wine transition-colors duration-300 leading-snug tracking-tight mb-2.5 line-clamp-2">
+                        {article.title}
+                      </h4>
+                      <p className="text-[11px] sm:text-[13px] text-slate-500 font-sans font-light leading-relaxed line-clamp-2 sm:line-clamp-3 mb-4">
+                        {article.summary}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 border-t border-brand-gold/10 flex items-center justify-between mt-auto">
+                      <button
+                        onClick={() => setSelectedArticle(article)}
+                        className="flex items-center gap-1 text-[9px] sm:text-[10px] font-sans font-bold tracking-[0.12em] uppercase text-brand-wine hover:text-brand-blue transition-colors duration-250 cursor-pointer"
+                      >
+                        <span>Acessar Leitura</span>
+                        <ChevronRight size={10} className="transform group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            )}
-
-            {/* Asymmetrical grid for the rest of articles */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-              {(activeCategory === 'Todos' ? filteredArticles.slice(1) : filteredArticles).map((article, index) => {
-                // Determine layout variation for visual asymmetry
-                const isLargeCard = index % 3 === 0;
-                const spanClass = isLargeCard ? 'lg:col-span-2 lg:flex-row' : 'lg:col-span-1 flex-col';
-                return (
-                  <motion.article
-                    key={article.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.65, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className={`group flex ${spanClass} bg-white border border-brand-gold/12 overflow-hidden shadow-lg transition-all duration-400 hover:shadow-2xl hover:border-brand-gold/35 rounded-[3px]`}
-                  >
-                    {/* Image banner */}
-                    <div className={`relative overflow-hidden bg-brand-blue shrink-0 ${isLargeCard ? 'h-52 sm:h-60 lg:h-auto lg:w-[42%]' : 'h-52 w-full'}`}>
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-blue/80 via-brand-dark-blue/10 to-transparent z-10" />
-                      <img
-                        src={article.imageUrl}
-                        alt={article.title}
-                        className="w-full h-full object-cover transform scale-100 group-hover:scale-[1.04] transition-transform duration-700"
-                        loading="lazy"
-                      />
-                      <span className="absolute top-4 left-4 z-20 font-sans text-[8px] tracking-[0.2em] font-bold uppercase px-2.5 py-1 bg-brand-dark-blue/90 text-brand-gold-light border border-brand-gold/20">
-                        {article.category}
-                      </span>
-                    </div>
-
-                    {/* Content body */}
-                    <div className="flex-1 p-6 sm:p-7 flex flex-col justify-between bg-brand-parchment">
-                      <div>
-                        {/* Meta */}
-                        <div className="flex items-center gap-2 mb-3.5 text-xs text-slate-400 font-sans">
-                          <span className="font-medium text-slate-500 truncate max-w-[120px]">{article.author}</span>
-                          <span>·</span>
-                          <span>{article.date}</span>
-                        </div>
-
-                        <h4 className="font-serif text-lg sm:text-xl font-bold text-brand-blue group-hover:text-brand-wine transition-colors duration-300 leading-snug tracking-tight mb-4">
-                          {article.title}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-slate-500 font-sans font-light leading-relaxed line-clamp-3 mb-6">
-                          {article.summary}
-                        </p>
-                      </div>
-
-                      <div className="pt-4 border-t border-brand-gold/10 flex items-center justify-between">
-                        <button
-                          onClick={() => setSelectedArticle(article)}
-                          className="flex items-center gap-1.5 text-[10px] font-sans font-bold tracking-[0.15em] uppercase text-brand-wine hover:text-brand-blue transition-colors duration-250 cursor-pointer"
-                        >
-                          <span>Acessar Leitura</span>
-                          <ChevronRight size={12} />
-                        </button>
-                      </div>
-                    </div>
-                  </motion.article>
-                );
-              })}
+                </motion.article>
+              ))}
             </div>
           </div>
         )}

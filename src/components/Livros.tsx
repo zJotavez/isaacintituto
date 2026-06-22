@@ -53,7 +53,7 @@ export default function Livros() {
         </div>
 
         {/* Books grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-10">
           {BOOKS.map((book, idx) => {
             const isInterested = interestedBookId === book.id;
             return (
@@ -63,7 +63,7 @@ export default function Livros() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.65, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group card-glow-gold flex flex-col cursor-default"
+                className="group card-glow-gold flex flex-col cursor-default font-sans"
                 style={{
                   background: 'linear-gradient(145deg, rgba(0,43,73,0.55) 0%, rgba(0,28,48,0.75) 100%)',
                   border: '1px solid rgba(166,137,74,0.18)',
@@ -72,7 +72,7 @@ export default function Livros() {
                 }}
               >
                 {/* Book cover mockup */}
-                <div className="relative p-7 pb-6 flex items-center justify-center overflow-hidden"
+                <div className="relative p-4 sm:p-7 pb-4 sm:pb-6 flex items-center justify-center overflow-hidden"
                   style={{ background: 'rgba(0,15,26,0.4)', borderBottom: '1px solid rgba(166,137,74,0.08)' }}
                 >
                   {/* Subtle vignette */}
@@ -81,33 +81,33 @@ export default function Livros() {
                   />
 
                   {/* 3D Book spine */}
-                  <div className={`relative w-36 h-52 shadow-2xl transform -rotate-3 group-hover:rotate-1 group-hover:scale-[1.08] group-hover:-translate-y-2 transition-all duration-500 ${book.coverColor} z-10`}
-                    style={{ borderRadius: '2px', borderLeft: '6px solid rgba(0,0,0,0.2)' }}
+                  <div className={`relative w-24 h-36 sm:w-32 sm:h-48 shadow-2xl transform -rotate-3 group-hover:rotate-1 group-hover:scale-[1.08] group-hover:-translate-y-2 transition-all duration-500 ${book.coverColor} z-10`}
+                    style={{ borderRadius: '2px', borderLeft: '4.5px solid rgba(0,0,0,0.2)' }}
                   >
                     {/* Inner gold frame */}
-                    <div className="absolute inset-2 pointer-events-none"
-                      style={{ border: '1px solid rgba(203,179,122,0.25)', borderRadius: '1px' }}
+                    <div className="absolute inset-1.5 pointer-events-none"
+                       style={{ border: '1px solid rgba(203,179,122,0.25)', borderRadius: '1px' }}
                     />
                     {/* Spine shadow */}
-                    <div className="absolute left-0 top-0 bottom-0 w-2 bg-black/15 z-20" />
+                    <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-black/15 z-20" />
 
                     {/* Book content */}
-                    <div className="relative z-10 flex flex-col justify-between h-full p-4">
+                    <div className="relative z-10 flex flex-col justify-between h-full p-2.5 sm:p-4">
                       <div>
-                        <span className="block font-display text-[6px] uppercase tracking-[0.2em] text-brand-gold/80 mb-1.5">
+                        <span className="block font-display text-[5px] sm:text-[6px] uppercase tracking-[0.2em] text-brand-gold/80 mb-1 sm:mb-1.5">
                           Memória Sefardita
                         </span>
-                        <h4 className="font-serif text-[10px] text-brand-ivory font-bold leading-tight tracking-wide line-clamp-5">
+                        <h4 className="font-serif text-[7px] sm:text-[9.5px] text-brand-ivory font-bold leading-tight tracking-wide line-clamp-4">
                           {book.title}
                         </h4>
                       </div>
                       <div className="text-right">
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center mx-auto mb-2"
+                        <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full flex items-center justify-center mx-auto mb-1.5"
                           style={{ border: '1px solid rgba(203,179,122,0.3)', background: 'rgba(0,15,26,0.6)' }}
                         >
-                          <span className="font-display text-[5.5px] text-brand-gold font-bold">IAF</span>
+                          <span className="font-display text-[4.5px] sm:text-[5.5px] text-brand-gold font-bold">IAF</span>
                         </div>
-                        <span className="font-serif text-[6px] text-brand-gold-light italic tracking-wide block truncate">
+                        <span className="font-serif text-[5px] sm:text-[6px] text-brand-gold-light italic tracking-wide block truncate">
                           {book.author.split(' ').slice(-2).join(' ')}
                         </span>
                       </div>
@@ -116,12 +116,12 @@ export default function Livros() {
                 </div>
 
                 {/* Book info */}
-                <div className="flex-1 flex flex-col p-7 sm:p-8">
+                <div className="flex-1 flex flex-col p-4 sm:p-7 sm:p-8">
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-1.5 mb-3">
                     {book.tags.map((tag) => (
                       <span key={tag}
-                        className="font-display text-[8px] uppercase tracking-[0.18em] font-semibold px-2.5 py-1"
+                        className="font-display text-[6.5px] sm:text-[8px] uppercase tracking-[0.18em] font-semibold px-1.5 py-0.5 sm:px-2.5 sm:py-1"
                         style={{
                           color: '#a6894a',
                           background: 'rgba(166,137,74,0.06)',
@@ -135,29 +135,29 @@ export default function Livros() {
                   </div>
 
                   {/* Title & Author */}
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-brand-ivory group-hover:text-brand-gold-light transition-colors duration-300 mb-2 tracking-wide leading-snug">
+                  <h3 className="font-serif text-sm sm:text-lg sm:text-xl font-bold text-brand-ivory group-hover:text-brand-gold-light transition-colors duration-300 mb-1 sm:mb-2 tracking-wide leading-snug line-clamp-2">
                     {book.title}
                   </h3>
-                  <span className="font-serif text-xs text-brand-gold/70 italic block mb-5">
+                  <span className="font-serif text-[10px] sm:text-xs text-brand-gold/70 italic block mb-3.5 sm:mb-5">
                     Por {book.author}
                   </span>
 
                   {/* Thin line */}
-                  <div className="w-10 h-[1px] mb-5 transition-all duration-400 group-hover:w-16"
+                  <div className="w-7 sm:w-10 h-[1px] mb-3.5 sm:mb-5 transition-all duration-400 group-hover:w-14 sm:group-hover:w-16"
                     style={{ background: 'linear-gradient(to right, rgba(166,137,74,0.5), transparent)' }}
                   />
 
                   {/* Description */}
-                  <p className="text-sm text-brand-ivory/55 font-sans font-light leading-relaxed mb-7 flex-1">
+                  <p className="text-[11px] sm:text-sm text-brand-ivory/55 font-sans font-light leading-relaxed mb-5 sm:mb-7 flex-1 line-clamp-3 sm:line-clamp-none">
                     {book.description}
                   </p>
 
                   {/* Footer CTA */}
-                  <div className="pt-5 border-t border-brand-gold/10 flex items-center justify-between gap-3">
+                  <div className="pt-4 sm:pt-5 border-t border-brand-gold/10 flex items-center justify-between gap-2.5">
                     <button
                       onClick={() => handleInterest(book.id)}
                       disabled={isInterested}
-                      className="flex items-center gap-2 text-[10px] font-sans uppercase tracking-[0.18em] font-bold px-4 py-2.5 transition-all duration-300 cursor-pointer"
+                      className="flex items-center gap-1 text-[8px] sm:text-[10px] font-sans uppercase tracking-[0.15em] font-bold px-2 py-1.5 sm:px-4 sm:py-2.5 transition-all duration-300 cursor-pointer"
                       style={{
                         background: isInterested ? 'rgba(93,16,29,0.8)' : 'rgba(166,137,74,0.06)',
                         color: isInterested ? '#cbb37a' : '#a6894a',
@@ -167,12 +167,12 @@ export default function Livros() {
                     >
                       {isInterested ? (
                         <>
-                          <ThumbsUp size={11} className="animate-bounce" />
-                          <span>Interesse Registrado</span>
+                          <ThumbsUp size={9} className="animate-bounce" />
+                          <span>Registrado</span>
                         </>
                       ) : (
                         <>
-                          <BookMarked size={11} />
+                          <BookMarked size={9} />
                           <span>Solicitar Indicação</span>
                         </>
                       )}
