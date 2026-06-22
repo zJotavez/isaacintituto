@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Landmark } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import symbolWhite from '../assets/symbol_white.png';
 
 export default function About() {
-  const [isUnrolled, setIsUnrolled] = useState(false);
-
   return (
     <section id="sobre" className="relative py-28 sm:py-36 paper-texture overflow-hidden">
 
@@ -97,110 +95,58 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Column 2 - Legacy sidebar card with old-paper styling (Now Interactive Scroll) */}
-          <div className="lg:col-span-5 w-full flex items-center justify-center min-h-[360px] sm:min-h-[420px]">
-            <AnimatePresence mode="wait">
-              {!isUnrolled ? (
-                <motion.div
-                  key="rolled"
-                  initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-                  animate={{ opacity: 1, scale: 1, rotate: -1 }}
-                  exit={{ opacity: 0, scale: 0.95, rotate: 1 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  onClick={() => setIsUnrolled(true)}
-                  className="historical-papyrus-rolled w-64 h-[350px] flex flex-col justify-between p-7 text-center select-none"
-                >
-                  {/* Decorative Ribbons and seal */}
-                  <div className="papyrus-ribbon" />
-                  <div className="wax-seal wax-seal-pulsing">IAF</div>
+          {/* Column 2 - Legacy sidebar card with old-paper styling (Sempre Aberto) */}
+          <motion.div
+            className="lg:col-span-5 w-full"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="relative historical-papyrus p-8 sm:p-10 overflow-hidden w-full">
+              
+              {/* Corner ornaments (historical documents) */}
+              <div className="absolute top-2.5 left-2.5 w-4 h-4 border-t border-l border-brand-gold/40 pointer-events-none" />
+              <div className="absolute top-2.5 right-2.5 w-4 h-4 border-t border-r border-brand-gold/40 pointer-events-none" />
+              <div className="absolute bottom-2.5 left-2.5 w-4 h-4 border-b border-l border-brand-gold/40 pointer-events-none" />
+              <div className="absolute bottom-2.5 right-2.5 w-4 h-4 border-b border-r border-brand-gold/40 pointer-events-none" />
 
-                  {/* Top / Bottom Rolled Effect bars */}
-                  <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-b from-black/25 to-transparent pointer-events-none" />
-                  <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-t from-black/25 to-transparent pointer-events-none" />
+              {/* Decorative wax seal stamp in top corner */}
+              <div className="absolute top-5 right-5 z-20 scale-90 sm:scale-100">
+                <div className="wax-seal">IAF</div>
+              </div>
 
-                  <div className="relative z-10 flex flex-col justify-between h-full pt-4">
-                    <span className="font-display text-[9px] tracking-[0.25em] text-amber-950/50 font-semibold uppercase">
-                      Manuscrito Selado
-                    </span>
-                    <div className="mb-2">
-                      <h4 className="font-serif text-[15px] font-bold text-amber-950/80 mb-2.5">
-                        Quem foi Isaac Aboab?
-                      </h4>
-                      <span className="font-display text-[9px] text-brand-wine font-bold tracking-wider animate-pulse block uppercase">
-                        Clique para desenrolar
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="unrolled"
-                  initial={{ opacity: 0, scaleY: 0.2, height: 100 }}
-                  animate={{ opacity: 1, scaleY: 1, height: 'auto' }}
-                  exit={{ opacity: 0, scaleY: 0.2, height: 100 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative historical-papyrus p-8 sm:p-10 overflow-hidden w-full"
-                  style={{ transformOrigin: 'top center' }}
-                >
-                  
-                  {/* Corner ornaments (historical documents) */}
-                  <div className="absolute top-2.5 left-2.5 w-4 h-4 border-t border-l border-brand-gold/40 pointer-events-none" />
-                  <div className="absolute top-2.5 right-2.5 w-4 h-4 border-t border-r border-brand-gold/40 pointer-events-none" />
-                  <div className="absolute bottom-2.5 left-2.5 w-4 h-4 border-b border-l border-brand-gold/40 pointer-events-none" />
-                  <div className="absolute bottom-2.5 right-2.5 w-4 h-4 border-b border-r border-brand-gold/40 pointer-events-none" />
+              {/* Wine accent bar */}
+              <div className="w-14 h-1 mb-7" style={{ background: 'linear-gradient(to right, #5d101d, rgba(93,16,29,0.3))' }} />
 
-                  {/* Decorative wax seal stamp in top corner */}
-                  <div className="absolute top-5 right-5 z-20 scale-90 sm:scale-100">
-                    <div className="wax-seal">IAF</div>
-                  </div>
+              <h3 className="font-display text-lg sm:text-xl font-semibold text-brand-wine mb-6 tracking-wide leading-snug">
+                Quem foi Isaac Aboab da Fonseca?
+              </h3>
 
-                  {/* Wine accent bar */}
-                  <div className="w-14 h-1 mb-7" style={{ background: 'linear-gradient(to right, #5d101d, rgba(93,16,29,0.3))' }} />
+              <div className="space-y-4 text-sm sm:text-[15px] text-amber-950/80 leading-[1.8] font-sans font-light">
+                <p>
+                  <strong className="text-brand-blue font-serif font-bold text-base">Rabino Isaac Aboab da Fonseca</strong>
+                  <span className="text-slate-500 text-xs ml-1 font-mono">(Amsterdã, 1605–1693)</span>
+                  {' '}foi um dos intelectuais mais brilhantes do Século de Ouro Sefardita na Holanda.
+                </p>
+                <p>
+                  Cabalista primoroso, tradutor de tratados filosóficos e orador dotado de excepcional retórica, ele entrou para os anais da história ao aceitar o convite da comunidade de Amsterdã para rumar ao nordeste brasileiro holandês em 1642.
+                </p>
+                <p>
+                  No Recife, consagrou-se como o{' '}
+                  <strong className="text-brand-wine font-serif font-semibold">Primeiro Rabino Formal das Américas</strong>,
+                  encabeçando a congregação Kahal Kadosh Zur Israel. De volta à Europa, foi um dos principais arquitetos doutrinais da célebre Esnoga de Amsterdã, moldando gerações de livre-pensadores.
+                </p>
 
-                  <h3 className="font-display text-lg sm:text-xl font-semibold text-brand-wine mb-6 tracking-wide leading-snug">
-                    Quem foi Isaac Aboab da Fonseca?
-                  </h3>
-
-                  <div className="space-y-4 text-sm sm:text-[15px] text-amber-950/80 leading-[1.8] font-sans font-light">
-                    <p>
-                      <strong className="text-brand-blue font-serif font-bold text-base">Rabino Isaac Aboab da Fonseca</strong>
-                      <span className="text-slate-500 text-xs ml-1 font-mono">(Amsterdã, 1605–1693)</span>
-                      {' '}foi um dos intelectuais mais brilhantes do Século de Ouro Sefardita na Holanda.
-                    </p>
-                    <p>
-                      Cabalista primoroso, tradutor de tratados filosóficos e orador dotado de excepcional retórica, ele entrou para os anais da história ao aceitar o convite da comunidade de Amsterdã para rumar ao nordeste brasileiro holandês em 1642.
-                    </p>
-                    <p>
-                      No Recife, consagrou-se como o{' '}
-                      <strong className="text-brand-wine font-serif font-semibold">Primeiro Rabino Formal das Américas</strong>,
-                      encabeçando a congregação Kahal Kadosh Zur Israel. De volta à Europa, foi um dos principais arquitetos doutrinais da célebre Esnoga de Amsterdã, moldando gerações de livre-pensadores.
-                    </p>
-
-                    {/* Italic quote footer */}
-                    <div className="border-t border-brand-gold/25 pt-5 mt-2">
-                      <p className="italic text-[12px] text-amber-900/70 font-serif leading-relaxed">
-                        "O Instituto recebe com profunda reverência o nome deste pioneiro, buscando emular sua coragem espiritual, rigor ético e devoção irrestrita ao conhecimento."
-                      </p>
-                    </div>
-
-                    {/* Interaction Button to Roll Back */}
-                    <div className="pt-4 flex justify-end">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setIsUnrolled(false);
-                        }}
-                        className="text-[10px] font-sans font-bold tracking-[0.15em] uppercase text-brand-wine hover:text-brand-blue transition-colors cursor-pointer border-b border-brand-wine/30 pb-0.5 hover:border-brand-blue"
-                      >
-                        Enrolar Manuscrito
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                {/* Italic quote footer */}
+                <div className="border-t border-brand-gold/25 pt-5 mt-2">
+                  <p className="italic text-[12px] text-amber-900/70 font-serif leading-relaxed">
+                    "O Instituto recebe com profunda reverência o nome deste pioneiro, buscando emular sua coragem espiritual, rigor ético e devoção irrestrita ao conhecimento."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
         </div>
       </div>
