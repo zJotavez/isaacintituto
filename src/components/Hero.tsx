@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { BookOpen, Compass, ChevronRight, Star } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import rabinoBg from '../assets/rabino_bg.png';
+import rabinoBg from '../assets/rabino_bg.jpg';
 import esnogaPanel from '../assets/esnoga_panel.png';
 
 interface HeroProps {
